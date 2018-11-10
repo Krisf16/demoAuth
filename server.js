@@ -46,6 +46,7 @@ app.get("/app/authenticate", async function (req, res, next) {
                 id: user.id,
                 username: user.name
             }, SUPER_SECRET_KEY); // Create token 
+
             res.status(200).send({
                 auth: token,
                 user: {
@@ -57,11 +58,7 @@ app.get("/app/authenticate", async function (req, res, next) {
         } else {
             // The request did not have valid credentials. 
             log("Bad credentials");
-            try {
-                res.status(401).end(); // We respond by telling the client that it has not been authenticated as of yet.
-            } catch (err) {
-                console.log(err);
-            }
+            res.status(401).end(); // We respond by telling the client that it has not been authenticated as of yet.
         }
     }
 });
